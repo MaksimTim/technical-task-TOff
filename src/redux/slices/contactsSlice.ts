@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import {RootState} from "../store";
+import { RootState } from "../store";
 
-interface Contact {
+export interface Contact {
   title: string;
   phone: string;
 }
@@ -27,8 +27,8 @@ export const contactsSlice = createSlice({
       state.contacts.push(payload);
     },
     removeContact: (state, { payload }: PayloadAction<Contact>) => {
-      state.contacts.filter(
-        (obj) => obj.title !== payload.title && obj.phone !== payload.phone
+      state.contacts = state.contacts.filter(
+        (obj) => obj.title !== payload.title || obj.phone !== payload.phone
       );
     },
     clearContacts: (state, action) => {

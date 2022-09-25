@@ -1,19 +1,20 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  Contact,
   contactsSelector,
   removeContact,
 } from "../../redux/slices/contactsSlice";
 import Button from "../button/button.component";
 import "./home.list.styles.scss";
 
-const HomeList = () => {
+const HomeList: React.FC = () => {
   const { contacts } = useSelector(contactsSelector);
 
   return (
     <div>
       {contacts.map((item) => (
-        <List item={item} key={item.phone + item.title} />
+        <List key={item.phone + item.title} {...item} />
       ))}
     </div>
   );
@@ -21,17 +22,17 @@ const HomeList = () => {
 
 export default HomeList;
 
-export const List = ({ item }) => {
+export const List: React.FC<Contact> = ({ title, phone }) => {
   const dispatch = useDispatch();
 
   const removeItem = () => {
-    dispatch(removeContact(item));
+    dispatch(removeContact({ title, phone }));
   };
 
   return (
     <div className="home-list-container">
       <div>
-        {item.title} - {item.phone}
+        {title} - {phone}
       </div>
       <Button buttonType="inverted" onClick={removeItem}>
         Удалить
