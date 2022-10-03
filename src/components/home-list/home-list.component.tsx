@@ -11,6 +11,7 @@ import "./home.list.styles.scss";
 const HomeList: React.FC = () => {
   const { contacts } = useSelector(contactsSelector);
 
+
   return (
     <div>
       {contacts.map((item) => (
